@@ -4,33 +4,61 @@
 /node_modules
 /.pnp
 .pnp.js
-.yarn/install-state.gz
 
 # testing
 /coverage
 
 # next.js
 /.next/
-/out/
-
-# production
 /build
+/out
+/dist
+/_bin
 
 # misc
 .DS_Store
 *.pem
 
 # debug
+.yarn
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
 # local env files
-.env*.local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # vercel
 .vercel
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts
+
+# editor
+.idea
+
+# bk
+_bk
+test.*.*
+test-ts.*.*
+
+# Sentry Config File
+.sentryclirc
+
+# Sentry
+next.config.original.js
+
+# Sentry
+next.config.wizardcopy.js
+
+# Temp
+~*.xls
+~*.xlsx
+~*.doc
+~*.docx
+
+# Sentry Config File
+.env.sentry-build-plugin

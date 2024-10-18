@@ -1,9 +1,63 @@
-import React from "react";
+'use client';
+
+import React, {FormEvent} from "react";
 import Image from 'next/image'
-import  Test from './assets/test.jpg';
+import BgNo2 from './assets/bg_no2.jpg';
+import HeartGif from './assets/heart.gif';
+import {FormProps} from 'antd';
+import {Button, Form, Input, Radio} from 'antd';
+
+type FieldType = {
+    Name?: string;
+    Type?: string;
+    Status?: string;
+    Message?: string;
+};
 
 export default function Home() {
 
+    const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
+        console.log('Success:', values);
+
+        const formData = new FormData()
+
+        formData.set('Name', values.Name!);
+        formData.set('Type', values.Type!);
+        formData.set('Status', values.Status!);
+        formData.set('Message', values.Message!);
+
+        fetch("https://script.google.com/macros/s/AKfycbyUklq2p7WiYkBNpzqitIZOKOpJwbJLcClU5REPZgAu8sSwD092KPd2YsdNUc1qOtL3/exec", {
+            method: 'POST',
+            body: formData,
+        }).then(res => res.json())
+            .then(data => {
+                console.log(data);
+                alert(data.msg);
+            })
+            .catch(err => console.log(err));
+    };
+
+    const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
+        console.log('Failed:', errorInfo);
+    };
+
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+
+        const formData = new FormData(event.currentTarget)
+
+        fetch("https://script.google.com/macros/s/AKfycbyUklq2p7WiYkBNpzqitIZOKOpJwbJLcClU5REPZgAu8sSwD092KPd2YsdNUc1qOtL3/exec", {
+            method: 'POST',
+            body: formData,
+        }).then(res => res.json())
+            .then(data => {
+                console.log(data);
+                alert(data.msg);
+            })
+            .catch(err => console.log(err));
+    }
 
     return (
         <div>
@@ -31,44 +85,104 @@ export default function Home() {
                 minHeight: '100%',
                 overflow: 'hidden',
             }}>
-                <div className={"h-[631.5px] my-0 mx-auto relative"}>
-                    <div
-                        className={"w-full h-full absolute top-0 left-0 pointer-events-none overflow-hidden bg-white"}/>
-                    <div className={"relative container mx-auto"}>
-                        <div className={"w-full h-full flex flex-row-reverse"}>
-                            <div className={"md:w-[800.956px] md:h-[631.5px]"}>
-                                <div className={"w-full h-full relative"}>
-                                    <div
-                                        className={"absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden"}>
-
-                                        <Image
-                                            src={"https://w.ladicdn.com/5b2dbb689c43c0cf1f2b96c1/bg-do-2-20210817165705.svg"}
-                                            alt={"aaa"}
-                                            fill
-                                            style={{height: "100%", width: "100%"}}
-                                        />
-                                    </div>
-                                    <div className={""}>
-                                        <Image
-                                            src={Test}
-                                            alt={"aaaaaaa"}
-                                            fill
-                                            style={{height: "100%", width: "100%"}}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                            <div className={"flex flex-col"}>
-                                <div className={"w-[48.6458px] h-[53.6745px]"}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
-                                         preserveAspectRatio="none" viewBox="0 0 24 24" className=""
-                                         fill="rgba(237, 66, 80, 1)">
-                                        <use xlinkHref="#shape_dddd"></use>
-                                    </svg>
+                <div className={"rounded-0 bg-gray-200 border-b px-3 py-4"}>
+                    <div className={"flex flex-col items-center"}>
+                        <div className={"max-w-40 max-h-40 mx-auto"}>
+                            <div
+                                className={"w-40 h-40 rounded-full overflow-hidden p-1 border-2 border-red-500 border-solid"}>
+                                <div className={"relative w-full h-full rounded-full"}>
+                                    <Image
+                                        className={"rounded-full object-cover object-center"}
+                                        src={BgNo2}
+                                        alt={"aaa"}
+                                        fill
+                                        objectFit={"cover"}
+                                    />
                                 </div>
                             </div>
                         </div>
+                        <h2 className={"text-3xl font-medium uppercase mt-3"}>
+                            Xác nhận tham dự
+                        </h2>
+                        <p className={"text-[22px] pt-2"}>Hôn lễ của</p>
+                        <div className={"flex justify-center items-center text-2xl font-bold"}>
+                            <span>
+                                Đinh Nam
+                            </span>
+                            <Image
+                                src={HeartGif}
+                                alt={"heart.gif"}
+                                height={50}
+                                width={50}
+                            />
+                            <span>
+                                Trâm Anh
+                            </span>
+                        </div>
                     </div>
+                </div>
+                <div className={"flex flex-col items-center mt-6"}>
+                    <Form
+                        name="basic"
+                        style={{maxWidth: 600}}
+                        onFinish={onFinish}
+                        onFinishFailed={onFinishFailed}
+                        autoComplete="off"
+                        layout="vertical"
+                    >
+                        <Form.Item<FieldType>
+                            name="Name"
+                            rules={[{required: true, message: 'Please input your username!'}]}
+                            label="Họ và Tên"
+                        >
+                            <Input/>
+                        </Form.Item>
+                        <Form.Item<FieldType>
+                            name="Type"
+                            label="Bạn là..."
+                        >
+                            <Radio.Group>
+                                <Radio value="1">Khách nhà Trai</Radio>
+                                <Radio value="0">Khách nhà Gái</Radio>
+                            </Radio.Group>
+                        </Form.Item>
+
+                        <Form.Item<FieldType>
+                            name="Status"
+                            label="Bạn tham dự hôn lễ cùng chúng tớ nhé!!!"
+                        >
+                            <Radio.Group>
+                                <Radio value="1">Oke!!!</Radio>
+                                <Radio value="0">Bận mất rồi {"=<<"}</Radio>
+                            </Radio.Group>
+                        </Form.Item>
+
+                        <Form.Item<FieldType>
+                            name="Message"
+                            label="Ghi chú/ Nhắn nhủ/ Góp ý"
+                        >
+                            <Input.TextArea rows={4}/>
+                        </Form.Item>
+
+                        <div className={"flex flex-col items-center italic"}>
+                            <div>
+                                Sự hiện diện của Quý vị
+                            </div>
+                            <div>
+                                là niềm vinh hạnh cho gia đình chúng tôi
+                            </div>
+                            <div>
+                                Rất hân hạnh được đón tiếp!
+                            </div>
+                        </div>
+                        <div className={"mt-4"}>
+                            <Form.Item wrapperCol={{offset: 8, span: 16}}>
+                                <Button type="primary" htmlType="submit">
+                                    Xác nhận
+                                </Button>
+                            </Form.Item>
+                        </div>
+                    </Form>
                 </div>
             </div>
         </div>
