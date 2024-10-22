@@ -6,6 +6,8 @@ import BgNo2 from './assets/bg_no2.jpg';
 import HeartGif from './assets/heart.gif';
 import {FormProps} from 'antd';
 import {Button, Form, Input, Radio} from 'antd';
+import {svnMotherCarmel, svnPRIMARK} from "@/app/fonts";
+import withTheme from "@/app/theme_config";
 
 type FieldType = {
     Name?: string;
@@ -14,7 +16,7 @@ type FieldType = {
     Message?: string;
 };
 
-export default function Home() {
+const Home = () => {
 
     const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
         console.log('Success:', values);
@@ -24,7 +26,6 @@ export default function Home() {
         formData.set('Name', values.Name!);
         formData.set('Type', values.Type!);
         formData.set('Status', values.Status!);
-        formData.set('Message', values.Message!);
 
         fetch("https://script.google.com/macros/s/AKfycbyUklq2p7WiYkBNpzqitIZOKOpJwbJLcClU5REPZgAu8sSwD092KPd2YsdNUc1qOtL3/exec", {
             method: 'POST',
@@ -85,11 +86,11 @@ export default function Home() {
                 minHeight: '100%',
                 overflow: 'hidden',
             }}>
-                <div className={"rounded-0 bg-gray-200 border-b px-3 py-4"}>
-                    <div className={"flex flex-col items-center"}>
+                <div className={"rounded-0 px-3 py-4"}>
+                     <div className={"flex flex-col items-center relative"}>
                         <div className={"max-w-40 max-h-40 mx-auto"}>
                             <div
-                                className={"w-40 h-40 rounded-full overflow-hidden p-1 border-2 border-red-500 border-solid"}>
+                                className={`w-40 h-40 rounded-full overflow-hidden p-1 border-2 border-[#52c41a] border-solid`}>
                                 <div className={"relative w-full h-full rounded-full"}>
                                     <Image
                                         className={"rounded-full object-cover object-center"}
@@ -101,10 +102,10 @@ export default function Home() {
                                 </div>
                             </div>
                         </div>
-                        <h2 className={"text-3xl font-medium uppercase mt-3"}>
+                        <h2 className={`text-3xl font-medium uppercase mt-6 ${svnMotherCarmel.className}`}>
                             Xác nhận tham dự
                         </h2>
-                        <p className={"text-[22px] pt-2"}>Hôn lễ của</p>
+                        <p className={`text-[22px] pt-2 ${svnPRIMARK.className}`}>Hôn lễ của</p>
                         <div className={"flex justify-center items-center text-2xl font-bold"}>
                             <span>
                                 Đinh Nam
@@ -121,70 +122,81 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                <div className={"flex flex-col items-center mt-6"}>
-                    <Form
-                        name="basic"
-                        style={{maxWidth: 600}}
-                        onFinish={onFinish}
-                        onFinishFailed={onFinishFailed}
-                        autoComplete="off"
-                        layout="vertical"
-                    >
-                        <Form.Item<FieldType>
-                            name="Name"
-                            rules={[{required: true, message: 'Please input your username!'}]}
-                            label="Họ và Tên"
+                <div className={"flex flex-col items-center mt-2"}>
+                    <div className={"h-20 w-20"}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none"
+                             viewBox="0 0 24 24" className="" fill="rgb(222, 15, 64)">
+                            <use xlinkHref="#shape_dddd"></use>
+                        </svg>
+                    </div>
+                    <div className={"mt-4"}>
+                        <Form
+                            name="basic"
+                            style={{maxWidth: 600}}
+                            onFinish={onFinish}
+                            onFinishFailed={onFinishFailed}
+                            autoComplete="off"
+                            layout="vertical"
                         >
-                            <Input/>
-                        </Form.Item>
-                        <Form.Item<FieldType>
-                            name="Type"
-                            label="Bạn là..."
-                        >
-                            <Radio.Group>
-                                <Radio value="1">Khách nhà Trai</Radio>
-                                <Radio value="0">Khách nhà Gái</Radio>
-                            </Radio.Group>
-                        </Form.Item>
-
-                        <Form.Item<FieldType>
-                            name="Status"
-                            label="Bạn tham dự hôn lễ cùng chúng tớ nhé!!!"
-                        >
-                            <Radio.Group>
-                                <Radio value="1">Oke!!!</Radio>
-                                <Radio value="0">Bận mất rồi {"=<<"}</Radio>
-                            </Radio.Group>
-                        </Form.Item>
-
-                        <Form.Item<FieldType>
-                            name="Message"
-                            label="Ghi chú/ Nhắn nhủ/ Góp ý"
-                        >
-                            <Input.TextArea rows={4}/>
-                        </Form.Item>
-
-                        <div className={"flex flex-col items-center italic"}>
-                            <div>
-                                Sự hiện diện của Quý vị
-                            </div>
-                            <div>
-                                là niềm vinh hạnh cho gia đình chúng tôi
-                            </div>
-                            <div>
-                                Rất hân hạnh được đón tiếp!
-                            </div>
-                        </div>
-                        <div className={"mt-4"}>
-                            <Form.Item wrapperCol={{offset: 8, span: 16}}>
-                                <Button type="primary" htmlType="submit">
-                                    Xác nhận
-                                </Button>
+                            <Form.Item<FieldType>
+                                name="Name"
+                                rules={[{required: true, message: 'Please input your username!'}]}
+                                label="Họ và Tên"
+                            >
+                                <Input/>
                             </Form.Item>
-                        </div>
-                    </Form>
+                            <Form.Item<FieldType>
+                                name="Type"
+                                label="Bạn là..."
+                                rules={[{required: true, message: 'Please input your username!'}]}
+                            >
+                                <Radio.Group>
+                                    <Radio value="1">Khách nhà Trai</Radio>
+                                    <Radio value="0">Khách nhà Gái</Radio>
+                                </Radio.Group>
+                            </Form.Item>
+
+                            <Form.Item<FieldType>
+                                name="Status"
+                                label="Bạn tham dự hôn lễ cùng chúng tớ nhé!!!"
+                                rules={[{required: true, message: 'Please input your username!'}]}
+                            >
+                                <Radio.Group>
+                                    <Radio value="1">Oke!!!</Radio>
+                                    <Radio value="0">Bận mất rồi {"=<<"}</Radio>
+                                </Radio.Group>
+                            </Form.Item>
+                            <div className={"flex flex-col items-center italic"}>
+                                <div>
+                                    Sự hiện diện của Quý vị
+                                </div>
+                                <div>
+                                    là niềm vinh hạnh cho gia đình chúng tôi
+                                </div>
+                                <div>
+                                    Rất hân hạnh được đón tiếp!
+                                </div>
+                            </div>
+                            <div className={"mt-4"}>
+                                <Form.Item wrapperCol={{offset: 8, span: 16}}>
+                                    <Button
+                                        type="primary"
+                                        htmlType="submit"
+                                    >
+                                        Xác nhận
+                                    </Button>
+                                </Form.Item>
+                            </div>
+                        </Form>
+                    </div>
                 </div>
             </div>
         </div>
     )
 }
+
+const HomePage = () => {
+    return withTheme(<Home/>);
+}
+
+export default HomePage;
