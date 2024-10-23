@@ -1,6 +1,6 @@
 'use client';
 
-import React, {FormEvent} from "react";
+import React, {FormEvent, useState} from "react";
 import Image from 'next/image'
 import BgNo2 from './assets/bg_no2.jpg';
 import HeartGif from './assets/heart.gif';
@@ -8,6 +8,7 @@ import {FormProps} from 'antd';
 import {Button, Form, Input, Radio} from 'antd';
 import {mtdQuangNinh, svnMotherCarmel, svnPleasent, svnPRIMARK} from "@/app/fonts";
 import withTheme from "@/app/theme_config";
+import SnowfallWidget from "@/app/components/SnowfallWidget";
 
 type FieldType = {
     Name?: string;
@@ -17,9 +18,13 @@ type FieldType = {
 };
 
 const Home = () => {
+    const [isLoading, setIsLoading] = useState(false)
+    const [isSuccess, setIsSuccess] = useState<boolean>(false)
 
     const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
         console.log('Success:', values);
+
+        setIsLoading(true)
 
         const formData = new FormData()
 
@@ -33,9 +38,14 @@ const Home = () => {
         }).then(res => res.json())
             .then(data => {
                 console.log(data);
-                alert(data.msg);
+                if(data && data.result && data.result == "success"){
+                    setIsSuccess(true)
+                }
             })
-            .catch(err => console.log(err));
+            .catch(err => console.log(err))
+            .finally(() => {
+                setIsLoading(false)
+            })
     };
 
     const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
@@ -43,24 +53,92 @@ const Home = () => {
     };
 
 
-    const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault()
+    const _buildSuccess = () => {
 
-        const formData = new FormData(event.currentTarget)
+        return (
+            <div className={"flex flex-col p-2 items-center text-3xl text-center"}>
+                <p className={`${svnPRIMARK.className}`}>
+                    Cảm ơn Bạn đã tham gia khảo sát của chúng tớ!!!!
+                </p>
+            </div>
+        )
+    }
 
-        fetch("https://script.google.com/macros/s/AKfycbyUklq2p7WiYkBNpzqitIZOKOpJwbJLcClU5REPZgAu8sSwD092KPd2YsdNUc1qOtL3/exec", {
-            method: 'POST',
-            body: formData,
-        }).then(res => res.json())
-            .then(data => {
-                console.log(data);
-                alert(data.msg);
-            })
-            .catch(err => console.log(err));
+    const _buildForm = () => {
+        return (
+            <div className={"flex flex-col items-center"}>
+                <div className={"mt-3"}>
+                    <Form
+                        name="basic"
+                        style={{maxWidth: 600}}
+                        onFinish={onFinish}
+                        onFinishFailed={onFinishFailed}
+                        autoComplete="off"
+                        layout="vertical"
+                    >
+                        <Form.Item<FieldType>
+                            name="Name"
+                            rules={[{required: true, message: 'Please input your username!'}]}
+                            label="Họ và Tên"
+                        >
+                            <Input/>
+                        </Form.Item>
+                        <Form.Item<FieldType>
+                            name="Type"
+                            label="Bạn là..."
+                            rules={[{required: true, message: 'Please input your username!'}]}
+                        >
+                            <Radio.Group>
+                                <Radio value="1">Khách nhà Trai</Radio>
+                                <Radio value="0">Khách nhà Gái</Radio>
+                            </Radio.Group>
+                        </Form.Item>
+
+                        <Form.Item<FieldType>
+                            name="Status"
+                            label="Bạn tham dự hôn lễ cùng chúng tớ nhé!!!"
+                            rules={[{required: true, message: 'Please input your username!'}]}
+                        >
+                            <Radio.Group>
+                                <Radio value="1">Xác nhận tham dự</Radio>
+                                <Radio value="0">Xác nhận không tham dự</Radio>
+                            </Radio.Group>
+                        </Form.Item>
+                        <div className={"flex flex-col items-center italic"}>
+                            <div>
+                                Sự hiện diện của Bạn
+                            </div>
+                            <div>
+                                là niềm vinh hạnh cho gia đình chúng tôi
+                            </div>
+                            <div>
+                                Rất hân hạnh được đón tiếp!
+                            </div>
+                        </div>
+                        <div className={"mt-4"}>
+                            <Form.Item wrapperCol={{offset: 8, span: 16}}>
+                                <Button
+                                    type="primary"
+                                    htmlType="submit"
+                                    loading={isLoading}
+                                >
+                                    Xác nhận
+                                </Button>
+                            </Form.Item>
+                        </div>
+                    </Form>
+                </div>
+            </div>
+        )
     }
 
     return (
         <div>
+            {
+                isSuccess ? (
+                    <SnowfallWidget/>
+                ) : undefined
+            }
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 style={{
@@ -86,7 +164,7 @@ const Home = () => {
                 overflow: 'hidden',
             }}>
                 <div className={"rounded-0 px-3 py-4"}>
-                     <div className={"flex flex-col items-center relative"}>
+                    <div className={"flex flex-col items-center relative"}>
                         <div className={"max-w-40 max-h-40 mx-auto"}>
                             <div
                                 className={`w-40 h-40 rounded-full overflow-hidden p-1 border-2 border-[#52c41a] border-solid`}>
@@ -105,7 +183,8 @@ const Home = () => {
                             Xác nhận tham dự
                         </h2>
                         <p className={`text-[28px] pt-2 ${svnPRIMARK.className}`}>Hôn lễ của</p>
-                        <div className={`mt-2 flex justify-center items-center text-2xl font-bold ${svnMotherCarmel.className}`}>
+                        <div
+                            className={`mt-2 flex justify-center items-center text-2xl font-bold ${svnMotherCarmel.className}`}>
                             <span>
                                 Đinh Nam
                             </span>
@@ -119,76 +198,18 @@ const Home = () => {
                                 Trâm Anh
                             </span>
                         </div>
+                        <div className={"h-20 w-20 mt-3"}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
+                                 preserveAspectRatio="none"
+                                 viewBox="0 0 24 24" className="" fill="rgb(222, 15, 64)">
+                                <use xlinkHref="#shape_dddd"></use>
+                            </svg>
+                        </div>
                     </div>
                 </div>
-                <div className={"flex flex-col items-center mt-2"}>
-                    <div className={"h-20 w-20"}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none"
-                             viewBox="0 0 24 24" className="" fill="rgb(222, 15, 64)">
-                            <use xlinkHref="#shape_dddd"></use>
-                        </svg>
-                    </div>
-                    <div className={"mt-4"}>
-                        <Form
-                            name="basic"
-                            style={{maxWidth: 600}}
-                            onFinish={onFinish}
-                            onFinishFailed={onFinishFailed}
-                            autoComplete="off"
-                            layout="vertical"
-                        >
-                            <Form.Item<FieldType>
-                                name="Name"
-                                rules={[{required: true, message: 'Please input your username!'}]}
-                                label="Họ và Tên"
-                            >
-                                <Input/>
-                            </Form.Item>
-                            <Form.Item<FieldType>
-                                name="Type"
-                                label="Bạn là..."
-                                rules={[{required: true, message: 'Please input your username!'}]}
-                            >
-                                <Radio.Group>
-                                    <Radio value="1">Khách nhà Trai</Radio>
-                                    <Radio value="0">Khách nhà Gái</Radio>
-                                </Radio.Group>
-                            </Form.Item>
-
-                            <Form.Item<FieldType>
-                                name="Status"
-                                label="Bạn tham dự hôn lễ cùng chúng tớ nhé!!!"
-                                rules={[{required: true, message: 'Please input your username!'}]}
-                            >
-                                <Radio.Group>
-                                    <Radio value="1">Xác nhận tham dự</Radio>
-                                    <Radio value="0">Xác nhận không tham dự</Radio>
-                                </Radio.Group>
-                            </Form.Item>
-                            <div className={"flex flex-col items-center italic"}>
-                                <div>
-                                    Sự hiện diện của Bạn
-                                </div>
-                                <div>
-                                    là niềm vinh hạnh cho gia đình chúng tôi
-                                </div>
-                                <div>
-                                    Rất hân hạnh được đón tiếp!
-                                </div>
-                            </div>
-                            <div className={"mt-4"}>
-                                <Form.Item wrapperCol={{offset: 8, span: 16}}>
-                                    <Button
-                                        type="primary"
-                                        htmlType="submit"
-                                    >
-                                        Xác nhận
-                                    </Button>
-                                </Form.Item>
-                            </div>
-                        </Form>
-                    </div>
-                </div>
+                {
+                    isSuccess ? _buildSuccess() : _buildForm()
+                }
             </div>
         </div>
     )
