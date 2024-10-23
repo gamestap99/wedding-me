@@ -6,7 +6,7 @@ import BgNo2 from './assets/bg_no2.jpg';
 import HeartGif from './assets/heart.gif';
 import {FormProps} from 'antd';
 import {Button, Form, Input, Radio} from 'antd';
-import {svnMotherCarmel, svnPRIMARK} from "@/app/fonts";
+import {mtdQuangNinh, svnMotherCarmel, svnPleasent, svnPRIMARK} from "@/app/fonts";
 import withTheme from "@/app/theme_config";
 
 type FieldType = {
@@ -102,11 +102,11 @@ const Home = () => {
                                 </div>
                             </div>
                         </div>
-                        <h2 className={`text-3xl font-medium uppercase mt-6 ${svnMotherCarmel.className}`}>
+                        <h2 className={`text-3xl font-medium uppercase mt-6`}>
                             Xác nhận tham dự
                         </h2>
-                        <p className={`text-[22px] pt-2 ${svnPRIMARK.className}`}>Hôn lễ của</p>
-                        <div className={"flex justify-center items-center text-2xl font-bold"}>
+                        <p className={`text-[28px] pt-2 ${svnPRIMARK.className}`}>Hôn lễ của</p>
+                        <div className={`mt-2 flex justify-center items-center text-2xl font-bold ${svnMotherCarmel.className}`}>
                             <span>
                                 Đinh Nam
                             </span>
@@ -162,13 +162,13 @@ const Home = () => {
                                 rules={[{required: true, message: 'Please input your username!'}]}
                             >
                                 <Radio.Group>
-                                    <Radio value="1">Oke!!!</Radio>
-                                    <Radio value="0">Bận mất rồi {"=<<"}</Radio>
+                                    <Radio value="1">Xác nhận tham dự</Radio>
+                                    <Radio value="0">Xác nhận không tham dự</Radio>
                                 </Radio.Group>
                             </Form.Item>
                             <div className={"flex flex-col items-center italic"}>
                                 <div>
-                                    Sự hiện diện của Quý vị
+                                    Sự hiện diện của Bạn
                                 </div>
                                 <div>
                                     là niềm vinh hạnh cho gia đình chúng tôi

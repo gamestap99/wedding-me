@@ -16,5 +16,15 @@ const svnPRIMARK = localFont({
     variable: "--font-svn-primark",
 });
 
+const mtdQuangNinh = localFont({
+    src: "./fonts/MTD_QUANGNINH_THUPHAP.ttf",
+    variable: "--font-mtd-quang-ninh",
+});
 
-export {svnMotherCarmel,svnPleasent,svnPRIMARK}
+
+export {
+    svnMotherCarmel,
+    svnPleasent,
+    svnPRIMARK,
+    mtdQuangNinh,
+}
