@@ -43,7 +43,6 @@ const Home = () => {
     };
 
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const onSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
