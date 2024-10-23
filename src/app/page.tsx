@@ -56,9 +56,9 @@ const Home = () => {
     const _buildSuccess = () => {
 
         return (
-            <div className={"flex flex-col p-2 items-center text-3xl text-center"}>
+            <div className={"flex flex-col p-2 items-center text-2xl text-center"}>
                 <p className={`${svnPRIMARK.className}`}>
-                    Cảm ơn Bạn đã tham gia khảo sát của chúng tớ!!!!
+                    Cảm ơn Bạn <br/>đã dành thời gian xác nhận tham dự  <br/>của chúng tớ!
                 </p>
             </div>
         )
@@ -184,15 +184,15 @@ const Home = () => {
                         </h2>
                         <p className={`text-[28px] pt-2 ${svnPRIMARK.className}`}>Hôn lễ của</p>
                         <div
-                            className={`mt-2 flex justify-center items-center text-2xl font-bold ${svnMotherCarmel.className}`}>
-                            <span>
+                            className={`mt-2.5 flex justify-center items-center text-2xl font-bold ${svnMotherCarmel.className}`}>
+                            <span className={"pr-1"}>
                                 Đinh Nam
                             </span>
                             <Image
                                 src={HeartGif}
                                 alt={"heart.gif"}
-                                height={50}
-                                width={50}
+                                height={40}
+                                width={40}
                             />
                             <span>
                                 Trâm Anh

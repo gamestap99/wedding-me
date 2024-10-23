@@ -1,5 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
+import Lotus from "../assets/lotus.png"
+import HeartGif from "@/app/assets/heart.gif";
+import Image from "next/image";
 
 const Snowflake = ({ size, left, duration, delay }) => {
     return (
@@ -17,10 +20,15 @@ const Snowflake = ({ size, left, duration, delay }) => {
             style={{
                 position: "absolute",
                 left: `${left}%`,
-                fontSize: `${size}px`
+                fontSize: `${size}px`,
             }}
         >
-            🌸
+            <Image
+                src={Lotus}
+                alt={"Lotus.gif"}
+                height={size}
+                width={size}
+            />
         </motion.div>
     );
 };
