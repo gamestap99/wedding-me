@@ -1,6 +1,6 @@
 'use client';
 
-import React, {FormEvent, useState} from "react";
+import React, {useState} from "react";
 import Image from 'next/image'
 import BgNo2 from './assets/bg_no2.jpg';
 import HeartGif from './assets/heart.gif';

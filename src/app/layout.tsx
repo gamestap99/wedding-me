@@ -20,6 +20,10 @@ const geistMono = localFont({
 export const metadata: Metadata = {
     title: "Wedding | Đinh Nam - Trâm Anh",
     description: "Hãy xem trang web này để biết thêm về đám cưới của Đinh Nam - Trâm Anh nhé!!!",
+    openGraph:{
+        title: 'Wedding | Đinh Nam - Trâm Anh',
+        description: 'Hãy xem trang web này để biết thêm về đám cưới của Đinh Nam - Trâm Anh nhé!!!',
+    }
 };
 
 
