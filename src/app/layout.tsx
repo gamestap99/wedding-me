@@ -23,6 +23,14 @@ export const metadata: Metadata = {
     openGraph:{
         type:"website",
         url:"https://wedding-me-iota.vercel.app/",
+        images: [
+            {
+                url: 'https://res.cloudinary.com/dpkfft6mq/image/upload/c_crop,g_auto,h_800,w_800/wedding/iza2wjlvumiy08yzhnrz.jpg', // Must be an absolute URL
+                width: 800,
+                height: 800,
+                alt:"My wedding pictures"
+            },
+        ],
         siteName:"Wedding | Đinh Nam - Trâm Anh",
         title: 'Wedding | Đinh Nam - Trâm Anh',
         description: 'Hãy xem trang web này để biết thêm về đám cưới của Đinh Nam - Trâm Anh nhé!!!',
