@@ -21,6 +21,9 @@ export const metadata: Metadata = {
     title: "Wedding | Đinh Nam - Trâm Anh",
     description: "Hãy xem trang web này để biết thêm về đám cưới của Đinh Nam - Trâm Anh nhé!!!",
     openGraph:{
+        type:"website",
+        url:"https://wedding-me-iota.vercel.app/",
+        siteName:"Wedding | Đinh Nam - Trâm Anh",
         title: 'Wedding | Đinh Nam - Trâm Anh',
         description: 'Hãy xem trang web này để biết thêm về đám cưới của Đinh Nam - Trâm Anh nhé!!!',
     }
