@@ -1,7 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import Lotus from "../assets/lotus.png"
-import HeartGif from "@/app/assets/heart.gif";
+import IconHy from "@/app/assets/icon_hy.png";
 import Image from "next/image";
 
 const Snowflake = ({ size, left, duration, delay }) => {
@@ -24,8 +23,8 @@ const Snowflake = ({ size, left, duration, delay }) => {
             }}
         >
             <Image
-                src={Lotus}
-                alt={"Lotus.gif"}
+                src={IconHy}
+                alt={"IconHy.png"}
                 height={size}
                 width={size}
             />

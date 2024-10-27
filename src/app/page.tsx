@@ -165,16 +165,16 @@ const Home = () => {
             }}>
                 <div className={"rounded-0 px-3 py-4"}>
                     <div className={"flex flex-col items-center relative"}>
-                        <div className={"max-w-40 max-h-40 mx-auto"}>
+                        <div className={"max-w-48 max-h-48 mx-auto"}>
                             <div
-                                className={`w-40 h-40 rounded-full overflow-hidden p-1 border-2 border-[#52c41a] border-solid`}>
+                                className={`w-48 h-48 rounded-full overflow-hidden p-1 border-2 border-[#52c41a] border-solid`}>
                                 <div className={"relative w-full h-full rounded-full"}>
                                     <Image
                                         className={"rounded-full object-cover object-center"}
                                         src={BgNo2}
                                         alt={"aaa"}
-                                        fill
-                                        objectFit={"cover"}
+                                        width={180}
+                                        height={180}
                                     />
                                 </div>
                             </div>
