@@ -4,7 +4,7 @@ import React, {useState} from "react";
 import Image from 'next/image'
 import BgNo2 from './assets/bg_no2.jpg';
 import HeartGif from './assets/heart.gif';
-import {FormProps} from 'antd';
+import {FormProps, InputNumber} from 'antd';
 import {Button, Form, Input, Radio} from 'antd';
 import {mtdQuangNinh, svnMotherCarmel, svnPleasent, svnPRIMARK} from "@/app/fonts";
 import withTheme from "@/app/theme_config";
@@ -14,7 +14,7 @@ type FieldType = {
     Name?: string;
     Type?: string;
     Status?: string;
-    Message?: string;
+    Total?: string;
 };
 
 const Home = () => {
@@ -31,6 +31,7 @@ const Home = () => {
         formData.set('Name', values.Name!);
         formData.set('Type', values.Type!);
         formData.set('Status', values.Status!);
+        formData.set('Total', values.Total!);
 
         fetch("https://script.google.com/macros/s/AKfycbyUklq2p7WiYkBNpzqitIZOKOpJwbJLcClU5REPZgAu8sSwD092KPd2YsdNUc1qOtL3/exec", {
             method: 'POST',
@@ -93,7 +94,6 @@ const Home = () => {
                                 <Radio value="0">Khách nhà Gái</Radio>
                             </Radio.Group>
                         </Form.Item>
-
                         <Form.Item<FieldType>
                             name="Status"
                             label="Bạn tham dự hôn lễ cùng chúng tớ nhé!!!"
@@ -103,6 +103,14 @@ const Home = () => {
                                 <Radio value="1">Xác nhận tham dự</Radio>
                                 <Radio value="0">Xác nhận không tham dự</Radio>
                             </Radio.Group>
+                        </Form.Item>
+                        <Form.Item<FieldType>
+                            name={"Total"}
+                            rules={[{required: true, message: 'Please input your username!'}]}
+                            label="Bạn tham gia cùng với mấy người"
+                            initialValue={"1"}
+                        >
+                            <InputNumber />
                         </Form.Item>
                         <div className={"flex flex-col items-center italic"}>
                             <div>

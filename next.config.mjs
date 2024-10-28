@@ -1,7 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ["w.ladicdn.com"],
+        remotePatterns:[
+            {
+                protocol: 'https',
+                hostname: '"w.ladicdn.com',
+                port: '',
+                search: '',
+            },
+        ],
         localPatterns: [
             {
                 pathname: 'src/app/assets/**',
