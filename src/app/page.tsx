@@ -230,7 +230,7 @@ const Home = () => {
                                              className={"flex flex-row justify-center items-center"}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                      className="bi bi-arrow-left-short" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
+                                    <path fillRule="evenodd"
                                           d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"></path>
                                 </svg>
                                 &nbsp;<span className={"underline"}>Về website Đám cưới</span>
@@ -293,11 +293,24 @@ const Home = () => {
                                     className={`w-48 h-48 rounded-full overflow-hidden p-1 border-2 border-[#dc3545] border-solid`}>
                                     <div className={"relative w-full h-full rounded-full"}>
                                         <Image
-                                            className={"rounded-full"}
-                                            src={isSuccess ? BgNo3 : BgNo2}
+                                            className={`rounded-full ${isSuccess ? "hidden" : "block"}`}
+                                            src={BgNo2}
                                             alt={"saveourdate-nam-tramanh"}
-                                            width={180}
-                                            height={180}
+                                            sizes="100vw"
+                                            fill
+                                            style={{
+                                                objectFit: 'cover',
+                                            }}
+                                        />
+                                        <Image
+                                            className={`rounded-full ${isSuccess ? "block" : "hidden"}`}
+                                            src={BgNo3}
+                                            alt={"saveourdate-nam-tramanh"}
+                                            sizes="100vw"
+                                            fill
+                                            style={{
+                                                objectFit: 'cover',
+                                            }}
                                         />
                                     </div>
                                 </div>
