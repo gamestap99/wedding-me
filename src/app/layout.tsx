@@ -25,9 +25,9 @@ export const metadata: Metadata = {
         url:"https://wedding-me-iota.vercel.app/",
         images: [
             {
-                url: 'https://res.cloudinary.com/dpkfft6mq/image/upload/t_dev/wedding/jhp1kxzmzyxoc59fb26u.jpg', // Must be an absolute URL
-                width: 3000,
-                height: 3000,
+                url: 'https://res.cloudinary.com/dpkfft6mq/image/upload/v1731006773/wedding/cp7egosv25tso6o9wmyz.jpg', // Must be an absolute URL
+                width: 945,
+                height: 630,
                 alt:"My wedding pictures"
             },
         ],
