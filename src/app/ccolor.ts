@@ -1,3 +1,3 @@
 export class CColor {
-    static primary = "#dc3545"
+    static primary = "#52c41a"
 }

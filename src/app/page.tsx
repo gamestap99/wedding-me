@@ -5,12 +5,13 @@ import Image from 'next/image'
 import BgNo2 from './assets/bg_no2.jpg';
 import BgNo3 from './assets/bg_no3.jpg';
 import HeartGif from './assets/heart.gif';
-import {Checkbox, Col, FormProps, InputNumber, Row, Select, Typography} from 'antd';
+import {FormProps, Select, Typography} from 'antd';
 import {Button, Form, Input, Radio} from 'antd';
-import {mtdQuangNinh, svnMotherCarmel, svnPleasent, svnPRIMARK} from "@/app/fonts";
+import {svnMotherCarmel, svnPRIMARK} from "@/app/fonts";
 import withTheme from "@/app/theme_config";
 import SnowfallWidget from "@/app/components/SnowfallWidget";
 import {FieldData} from "rc-field-form/es/interface";
+import Fireworks from "@/app/components/Fireworks";
 
 type FieldType = {
     Name?: string;
@@ -95,7 +96,7 @@ const Home = () => {
 
     const _buildForm = () => {
         return (
-            <div className={"flex flex-col items-center"}>
+            <div className={"flex flex-col items-center px-4"}>
                 <div className={"mt-3"}>
                     <Form
                         form={form}
@@ -216,9 +217,6 @@ const Home = () => {
                                     htmlType="submit"
                                     loading={isLoading}
                                     size={"middle"}
-                                    style={{
-                                        backgroundColor: "#dc3545",
-                                    }}
                                 >
                                     Xác nhận
                                 </Button>
@@ -275,42 +273,24 @@ const Home = () => {
             }}>
                 <div className={"rounded-0 flex flex-col"}>
                     <section className={"relative w-screen"}>
-                        {/*<Image*/}
-                        {/*    className={"top-0 left-0 w-full h-full"}*/}
-                        {/*    alt="Mountains"*/}
-                        {/*    src={Background}*/}
-                        {/*    placeholder="blur"*/}
-                        {/*    quality={100}*/}
-                        {/*    fill*/}
-                        {/*    sizes="100vw"*/}
-                        {/*    style={{*/}
-                        {/*        objectFit: 'cover',*/}
-                        {/*    }}*/}
-                        {/*/>*/}
                         <div className={"relative flex flex-col items-center p-4"}>
                             <div className={"max-w-48 max-h-48 mx-auto"}>
                                 <div
-                                    className={`w-48 h-48 rounded-full overflow-hidden p-1 border-2 border-[#dc3545] border-solid`}>
+                                    className={`w-48 h-48 rounded-full overflow-hidden p-1 border-2 border-[#52c41a] border-solid`}>
                                     <div className={"relative w-full h-full rounded-full"}>
                                         <Image
                                             className={`rounded-full ${isSuccess ? "hidden" : "block"}`}
                                             src={BgNo2}
                                             alt={"saveourdate-nam-tramanh"}
-                                            sizes="100vw"
-                                            fill
-                                            style={{
-                                                objectFit: 'cover',
-                                            }}
+                                            sizes={"180px"}
+                                            priority={true}
                                         />
                                         <Image
                                             className={`rounded-full ${isSuccess ? "block" : "hidden"}`}
                                             src={BgNo3}
                                             alt={"saveourdate-nam-tramanh"}
-                                            sizes="100vw"
-                                            fill
-                                            style={{
-                                                objectFit: 'cover',
-                                            }}
+                                            sizes={"180px"}
+                                            priority={true}
                                         />
                                     </div>
                                 </div>
@@ -390,6 +370,7 @@ const Home = () => {
                     isSuccess ? _buildSuccess() : _buildForm()
                 }
             </div>
+            <Fireworks />
         </div>
     )
 }
