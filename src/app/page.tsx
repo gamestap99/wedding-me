@@ -11,7 +11,6 @@ import {svnMotherCarmel, svnPRIMARK} from "@/app/fonts";
 import withTheme from "@/app/theme_config";
 import SnowfallWidget from "@/app/components/SnowfallWidget";
 import {FieldData} from "rc-field-form/es/interface";
-import Fireworks from "@/app/components/Fireworks";
 
 type FieldType = {
     Name?: string;
@@ -380,7 +379,6 @@ const Home = () => {
                     isSuccess ? _buildSuccess() : _buildForm()
                 }
             </div>
-            <Fireworks />
         </div>
     )
 }
